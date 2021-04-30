@@ -13,4 +13,6 @@ Input arguments (in order)
 -  maximum fraction to remove of codon usage of yeast i.e. 0.3
 
 Example usage
-''' python3 ./rebalance_codon_usage.py codon_usage.tsv codon_usage_rebalanced.tsv 0.1 0.3 '''
+   ```sh
+   python3 ./rebalance_codon_usage.py codon_usage.tsv codon_usage_rebalanced.tsv 0.1 0.3
+   ```
