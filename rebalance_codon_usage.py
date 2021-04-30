@@ -19,8 +19,8 @@ import sys
 
 codon_table = sys.argv[1]
 output = sys.argv[2]
-min_fraction_any = int(sys.argv[3])
-max_remove_fraction = int(sys.argv[4])
+min_fraction_any = float(sys.argv[3])
+max_remove_fraction = float(sys.argv[4])
 
 ## read codon table into dictionary of list of lists, one list of lists for each amino acid
 codon_table_dict = {}
