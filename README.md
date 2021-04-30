@@ -1,6 +1,6 @@
 # codon_rebalance
 
-This python script uses hierarchical clustering to merge highly similar eccDNA forming regions together
+This python script rebalances codon choices to avoid using codons that are rare in any of the desired species
 
 Input format is currently hard coded and should be tab delimited file that looks like so:
 - first row is header
