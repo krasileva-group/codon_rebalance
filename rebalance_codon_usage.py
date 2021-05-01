@@ -26,7 +26,7 @@ max_remove_fraction = float(sys.argv[4])
 codon_table_dict = {}
 with open(codon_table, newline = '') as file:
     file_reader = csv.reader(file, delimiter = '\t')
-    next(file_reader) ## skip header
+    header = next(file_reader) ## skip header
     for row in file_reader:
         if row[1] not in codon_table_dict:
             codon_table_dict[row[1]] = []
@@ -55,7 +55,7 @@ for key in codon_table_arrays:
         codon_table_optimized[key] = subset_array
 
 ## recalculate fractions for each aa based off new totals and add to list
-codon_table_final = []
+codon_table_final = [header]
 for key in codon_table_optimized:
     array = codon_table_optimized[key]
     sum_one = np.sum(array[:,3])
@@ -64,9 +64,15 @@ for key in codon_table_optimized:
     sum_four = np.sum(array[:,12])
     for line in array:
         codon_table_final.append([line[0], key, '', '', '', line[0], round(line[3]/sum_one,2), line[2] , line[3],
-                                 round(line[6]/sum_two,2), line[5] , line[6],
-                                 round(line[9]/sum_three,2), line[8] , line[9],
-                                 round(line[12]/sum_four,2), line[11], line[12]])
+                                 line[0], round(line[6]/sum_two,2), line[5] , line[6],
+                                 line[0], round(line[9]/sum_three,2), line[8] , line[9],
+                                 line[0], round(line[12]/sum_four,2), line[11], line[12]])
+    for codon in aa_codon_pairs[key]:
+        if codon not in array[:,0]:
+            codon_table_final.append([codon, key, '', '', '', codon, 0, 0, 0,
+                                     codon, 0, 0, 0,
+                                     codon, 0, 0, 0,
+                                     codon, 0, 0, 0])
 
 ## write list
 with open(output, 'w', newline = '') as output_file:
