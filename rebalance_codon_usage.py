@@ -35,6 +35,16 @@ with open(codon_table, newline = '') as file:
                                         float(row[14]), float(row[15]), int(row[16]),
                                         float(row[18]), float(row[19]), int(row[20])])
 
+## use to fill zeros at the end
+aa_codon_pairs = {}
+with open(codon_table, newline = '') as file:
+    file_reader = csv.reader(file, delimiter = '\t')
+    header = next(file_reader) ## skip header
+    for row in file_reader:
+        if row[1] not in aa_codon_pairs:
+            aa_codon_pairs[row[1]] = []
+        aa_codon_pairs[row[1]].append(row[0])
+
 ## convert to numpy 2D array
 codon_table_arrays = {}
 for key in codon_table_dict.keys():
